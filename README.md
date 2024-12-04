@@ -24,17 +24,88 @@ In timing diagram Q0 is changing as soon as the negative edge of clock pulse is 
 
 **Procedure**
 
-/* write all the steps invloved */
+1.Type the Verilog program in Quartus Prime to implement the 4-bit Serial-In Serial
+Out (SISO) Shift Register.
+2.Compile and run the program to ensure the design is error-free.
+3.Generate the RTL schematic to visualize the cascading D flip-flop connections and
+save it for documentation.
+4.Create nodes for the serial input (SI), clock (CLK), and serial output (SO) to observe the
+shifting process during simulation.
+5.Simulate the design for different input serial data patterns and observe the timing
+diagrams.
 
 **PROGRAM**
 
 /* Program for 4 Bit Ripple Counter and verify its truth table in quartus using Verilog programming.
 
- Developed by: RegisterNumber:
+ Developed by: Sanjit A RegisterNumber: 24005054
+
+  module ripple(
+   input wire clk,  // Clock input
+   output reg [3:0] count // 4-bit counter output
+ );
+ // Counter logic
+ always @(posedge clk) begin
+   if (count == 4'b1111) // Reset when count reaches 15
+       count <= 4'b0000;
+   else
+       count <= count + 1; // Increment count
+ end
+ endmodule
+ // Testbench
+ module RippleCounter_tb;
+ // Inputs
+ reg clk;
+ // Outputs
+ wire [3:0] count;
+ // Instantiate the counter
+ RippleCounter uut(
+   .clk(clk),
+   .count(count)
+ );
+ // Clock generation
+ initial begin
+   clk = 0;
+   forever #5 clk = ~clk; // Toggle clock every 5 time units
+ end
+RTL LOGIC FOR 4 Bit Ripple Counter
+ TIMING DIGRAMS FOR 4 Bit Ripple Counter
+ // Stimulus
+ initial begin
+   // Wait for a few clock cycles
+   #10;
+   
+   // Display header
+   $display("Time | Count");
+   $display("-----------------");
+   
+   // Functional table testing
+   // Increment count 16 times and display the count
+   repeat (16) begin
+       #5; // Wait for one clock cycle
+       $display("%4d | %b", $time, count);
+   end
+   
+   // End simulation
+   $finish;
+ end
+ endmodule
+
 */
+
+Truth Table:
+![image](https://github.com/user-attachments/assets/3da67596-d0d2-44d3-abf6-733c77a33ca8)
+
 
 **RTL LOGIC FOR 4 Bit Ripple Counter**
 
+![image](https://github.com/user-attachments/assets/4518169c-4b3a-4dfe-b98a-bd427215df38)
+
+
 **TIMING DIGRAMS FOR 4 Bit Ripple Counter**
+![image](https://github.com/user-attachments/assets/33e5d5ac-167f-4f44-994a-7b7ac8809454)
+
 
 **RESULTS**
+Thus, the 4-bit Ripple Counter was successfully implemented, and its functionality was
+validated using the truth table.
