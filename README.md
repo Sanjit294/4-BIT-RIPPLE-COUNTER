@@ -38,17 +38,8 @@ different input serial data patterns and observe the timing diagrams.
 
  Developed by: Sanjit A RegisterNumber: 24005054
 
- module ripple(out,clk,rst);
-input clk,rst;
-output reg [3:0]out;
-always @ (posedge clk)
-begin
-   if(rst)
-     out<=0;
-   else 
-     out <= out-1;
-end
-endmodule
+![WhatsApp Image 2024-12-26 at 10 30 39_9d4cfb13](https://github.com/user-attachments/assets/4e5fe8e3-0617-443a-9c06-c1a34b19096c)
+
 
 */
 
